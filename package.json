@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "git-config": "0.0.6",
+    "lodash": "^3.8.0",
     "yeoman-generator": "~0.16.0",
     "yosay": "^0.1.0"
   },
