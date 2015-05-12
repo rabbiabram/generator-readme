@@ -1,22 +1,34 @@
-# generator-readmemd
+# generator readme
 
-> A Yeoman generator to create a readme file.
+> A Yeoman generator to create a readme file
 
 Fork of [generator-readme](https://github.com/tlvince/generator-readme)
-
-## Usage
-
-```bash
-npm install -g yo generator-readmemd
-yo readmemd
-```
 
 ## Authors
 
 © 2014 Tom Vincent <http://tlvince.com/contact>
+© 2015 Vladislav Bezverkhiy <bezverhiy@a2design.biz>
 
-© 2015 Vladislav Bezverkhiy <rabbiabram@gmail.com>
+
+## Dependencies
+
+
+
+### Node.js dependnecies
+
+ 
+* git-config: 0.0.6
+ 
+* lodash: ^3.8.0
+ 
+* yeoman-generator: ~0.16.0
+ 
+* yosay: ^0.1.0
+
+
+
+
 
 ## License
 
-Licensed under the [MIT license](http://tlvince.mit-license.org).
+Released under the [MIT license](http://.mit-license.org).
