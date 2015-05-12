@@ -33,6 +33,19 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
 
     this.log(yosay('Welcome to the marvelous Readme generator!'));
     var self = this;
+    var root = this.destinationRoot();
+
+    var description = "";
+    if (fs.existsSync(p.join(root, 'package.json'))) {
+      var pkgJson = this.read(p.join(root, 'package.json'));
+
+      try {
+        pkgJson = JSON.parse(pkgJson);
+        description = pkgJson.description;
+      } catch (e) {
+
+      }
+    }
 
     var prompts = [
       {
@@ -44,7 +57,9 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
       {
         type: 'input',
         name: 'description',
-        message: 'Briefly describe the project'
+        message: 'Briefly describe the project',
+        store: true,
+        default: description,
       },
       {
         type: 'input',
