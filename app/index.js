@@ -65,15 +65,19 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
     var description = "";
     var appname = this.appname;
     if (fs.existsSync(p.join(root, 'package.json'))) {
-      var pkgJson = this.read(p.join(root, 'package.json'));
-
       try {
-        pkgJson = JSON.parse(pkgJson);
-        description = pkgJson.description;
-        appname = pkgJson.name;
-      } catch (e) {
+         var pkgJson = this.read(p.join(root, 'package.json'));
+        try {
+          pkgJson = JSON.parse(pkgJson);
+          description = pkgJson.description;
+          appname = pkgJson.name;
+        } catch (e) {
 
+        }       
+      } catch(e) {
+        console.log(e);
       }
+
     }
 
     var prompts = [
@@ -184,10 +188,13 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
       for (var i=0; i<reqs.length; i++) {
         var n = reqs[i];
         var path = p.join(root, n);
-        var content = self.read(path);
-        var parsed = parser.parse(n, content);
-
-
+        var parsed = null;
+        try {
+          var content = self.read(path);
+          var parsed = parser.parse(n, content);         
+        } catch(e) {
+          console.log('File ' + path + ' don\'t readable');
+        }
         if (parsed) {
           newReqs.push(parsed);
         }
