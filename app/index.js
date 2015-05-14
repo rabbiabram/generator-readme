@@ -7,23 +7,18 @@ var fs = require('fs');
 var p = require('path');
 var _ = require('lodash');
 var parser = require('./parser/parser');
-var getRepoInfo = require('git-repo-info');
 
 var ReadmeGenerator = yeoman.generators.Base.extend({
   init: function() {
     this.author = this.email = this.githubUser = '';
     this.year = new Date().getFullYear();
-    var info = getRepoInfo();
     var self = this;
-
-    console.log(info);
 
     var done = this.async();
     gitConfig(function(err, config) {
       if(err) {
         return done();
       }
-      console.log(config);
       this.author = config.user.name;
       this.email = config.user.email;
       this.githubUser = null;
@@ -64,12 +59,14 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
     var root = this.destinationRoot();
 
     var description = "";
+    var appname = this.appname;
     if (fs.existsSync(p.join(root, 'package.json'))) {
       var pkgJson = this.read(p.join(root, 'package.json'));
 
       try {
         pkgJson = JSON.parse(pkgJson);
         description = pkgJson.description;
+        appname = pkgJson.name;
       } catch (e) {
 
       }
@@ -88,6 +85,14 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
         message: 'Briefly describe the project',
         store: true,
         default: description,
+      },
+      {
+        type: 'input',
+        name: 'installation',
+        message: 'How to install your project?',
+        store: true,
+        default: 'npm i ' + appname,
+
       },
       {
         type: 'input',
