@@ -7,24 +7,52 @@ var fs = require('fs');
 var p = require('path');
 var _ = require('lodash');
 var parser = require('./parser/parser');
+var getRepoInfo = require('git-repo-info');
 
 var ReadmeGenerator = yeoman.generators.Base.extend({
   init: function() {
     this.author = this.email = this.githubUser = '';
     this.year = new Date().getFullYear();
+    var info = getRepoInfo();
+    var self = this;
+
+    console.log(info);
 
     var done = this.async();
     gitConfig(function(err, config) {
       if(err) {
         return done();
       }
+      console.log(config);
       this.author = config.user.name;
       this.email = config.user.email;
       this.githubUser = null;
       if (config.github && config.github.user) {
         this.githubUser = config.github.user;
       }
-      done();
+      var exec = require('child_process').exec;
+      exec('git remote -v', function(err, stdout, stderr) {
+        if (err) {
+          return done();
+        }
+
+        if (stdout) {
+          var remotes = stdout.replace('\r', '').split('\n');
+          _.each(remotes, function(e) {
+            var e = e.split('\t');
+            if (e[0] === 'origin') {
+              var remote = e[1].split(' ')[0];
+              self.gitRemote = remote;
+            }
+          });
+        }
+        if (self.gitRemote.indexOf('gihtub' !== -1)) {
+          self.gihtubShortUrl = self.gitRemote.split(':').slice(-1)[0].split('.')[0];
+        }
+        return done();
+
+      });
+      // done();
     }.bind(this));
   },
 
@@ -108,6 +136,26 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
           return chs;
 
         }
+      },
+      {
+        type: 'confirm',
+        name: 'needTravisBadge',
+        message: 'Do you need to add travis badge?',
+        store: true,
+        default: true,
+        when: function(props) {
+          return fs.existsSync('.travis.yml') && self.gitRemote;
+        }
+      },
+      {
+        type: 'input',
+        name: 'gihtubShortUrl',
+        message: 'Specify your GitHub <username/repo>:',
+        store: true,
+        default: this.gihtubShortUrl,
+        when: function(props) {
+          return props.needTravisBadge;
+        }
       }
     ];
 
@@ -141,7 +189,6 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
     if (this.requirements.length > 0) {
       updateRequirements(this.requirements);
     }
-    // console.log(this.requirements);
     this.template('_readme.md', 'README.md');
   }
 });
