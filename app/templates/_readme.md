@@ -5,6 +5,12 @@
 
 > <%= description %>
 
+## Installation
+<% if (installation) { %>
+```bash
+    <%= installation %>
+```<% } %>
+
 ## Author
 
 © <%= year %> <%= author %> <<%= email %>>
