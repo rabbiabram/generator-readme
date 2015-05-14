@@ -19,8 +19,12 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
       if(err) {
         return done();
       }
-      this.author = config.user.name;
-      this.email = config.user.email;
+      this.author = null;
+      this.email = null;
+      if (config && config.user) {
+        this.author = config.user.name;
+        this.email = config.user.email;        
+      }
       this.githubUser = null;
       if (config.github && config.github.user) {
         this.githubUser = config.github.user;
