@@ -11,10 +11,6 @@
     npm i generator-readmemd
 ```
 
-## Author
-
-© 2015 Vladislav Bezverkhiy <bezverhiy@a2design.biz>
-
 
 ## Dependencies
 
@@ -28,6 +24,11 @@
  
 * yosay: ^0.1.0
 
+
+
+## Author
+© 2015 Vladislav Bezverkhiy <bezverhiy@a2design.biz>
+
 ## License
 
-Released under the [MIT license](http://.mit-license.org).
+Released under the [MIT license](http://rabbiabram.mit-license.org).
