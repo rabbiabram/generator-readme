@@ -195,7 +195,7 @@ var ReadmeGenerator = yeoman.generators.Base.extend({
       self.requirements = newReqs;
     }
 
-    if (this.requirements.length > 0) {
+    if (this.requirements && this.requirements.length > 0) {
       updateRequirements(this.requirements);
     }
     this.template('_readme.md', 'README.md');
