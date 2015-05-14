@@ -28,7 +28,10 @@ describe('readme generator', function () {
       author: 'Yeoman',
       email: 'yo@man.com',
       username: 'yeoman',
-      year: '2014'
+      year: '2014',
+      needTravisBadge: true,
+      installation: 'npm i generator-readmemd',
+      requirements: ['package.json'],
     });
     this.app.run({}, function () {
       helpers.assertFile(expected);
