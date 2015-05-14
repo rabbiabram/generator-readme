@@ -5,6 +5,12 @@
 
 > A Yeoman generator to create a readme file
 
+## Installation
+
+```bash
+    npm i generator-readmemd
+```
+
 ## Author
 
 © 2015 Vladislav Bezverkhiy <bezverhiy@a2design.biz>
@@ -12,10 +18,7 @@
 
 ## Dependencies
 
-
-
 ### Node.js dependnecies
-
  
 * git-config: 0.0.6
  
@@ -24,10 +27,6 @@
 * yeoman-generator: ~0.16.0
  
 * yosay: ^0.1.0
-
-
-
-
 
 ## License
 
