@@ -1,4 +1,7 @@
 # <%= name %>
+<% if (needTravisBadge) { %>
+[![Build Status](https://travis-ci.org/<%= gihtubShortUrl %>.svg?branch=master)](https://travis-ci.org/<%= gihtubShortUrl %>)
+<% } %>
 
 > <%= description %>
 
