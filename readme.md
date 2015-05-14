@@ -1,12 +1,12 @@
 # generator readme
 
+[![Build Status](https://travis-ci.org/rabbiabram/generator-readme.svg?branch=master)](https://travis-ci.org/rabbiabram/generator-readme)
+
+
 > A Yeoman generator to create a readme file
 
-Fork of [generator-readme](https://github.com/tlvince/generator-readme)
+## Author
 
-## Authors
-
-© 2014 Tom Vincent <http://tlvince.com/contact>
 © 2015 Vladislav Bezverkhiy <bezverhiy@a2design.biz>
 
 
