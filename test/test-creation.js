@@ -19,7 +19,7 @@ describe('readme generator', function () {
 
   it('creates expected files', function (done) {
     var expected = [
-      'readme.md'
+      'README.md'
     ];
 
     helpers.mockPrompt(this.app, {
